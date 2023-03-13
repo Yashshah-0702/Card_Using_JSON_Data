@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+<body>
+   
+        
+            <div class="row" id="card">
+
+            </div>
+            
+        
+        
+    
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+    </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+    </script>
+
+    <script>
+        fetch('./data.json').then((response)=>{
+            return response.json();
+        })
+        .then((data)=>{
+           var tmp = data.Products;
+           var card = document.getElementById("card")
+        
+        
+           for(var i=0;i<tmp.length;i++){
+             card.innerHTML +=`<div class="card col-lg-3 col-md-6 col-sm-12 col-xs-12"><img class="img img-fluid" src="https://tse1.mm.bing.net/th/id/OIP.SWp6RzsLW11KD05zziq3hAHaKD?pid=ImgDet&rs=1" alt="img(${i})" /><h4 class="card-title">${tmp[i]["Name"]}</h4> <h4>${tmp[i]["Price"]}</h4><p class="card-body">${tmp[i]["Location"]}</p> <button class="btn btn-primary" onclick="show(${i})">Add To Cart</button></div> `
+              
+           }})
+
+           function show(id){
+            let array=[]
+            let items = JSON.parse(localStorage.getItem("Products"))
+            console.log(items.Products[id])
+            array.push(items.Products[id])
+            localStorage.setItem("itemsJson",JSON.stringify(array))
+           }
+
+          
+
+         
+    </script>
+</body>
+</html>
